@@ -1,0 +1,20 @@
+name: Run Video Scraper
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # 毎時0分に実行
+  workflow_dispatch:
+
+jobs:
+  scraper:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4 bs4
+      - name: Run scraper
+        run: python video_scraper2.py https://www.dmm.co.jp/digital/videoa/-/detail/=/cid=sone00682/?i3_ref=ranking&i3_ord=5&i3_pst=1&dmmref=monthly_ranking_video_top&via=video_top
